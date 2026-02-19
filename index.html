@@ -1,120 +1,199 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dr. Ashish Shukla</title>
+    <title>Dr. Ashish Shukla | Photonics Engineer</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
-            font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            background-color: #f8f9fa;
-            color: #222;
+            font-family: 'Segoe UI', sans-serif;
+            background: #0b0f1a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
 
         header {
-            background: #111;
-            color: white;
-            padding: 60px 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
         }
 
-        header h1 {
+        h1 {
+            font-size: 60px;
             margin: 0;
-            font-size: 42px;
+            text-shadow: 0 0 20px #00bfff;
         }
 
-        header p {
-            margin-top: 10px;
-            font-size: 18px;
+        .subtitle {
+            font-size: 22px;
+            margin-top: 15px;
+            color: #00bfff;
+        }
+
+        .tagline {
+            margin-top: 20px;
+            max-width: 600px;
             color: #ccc;
         }
 
         section {
-            max-width: 900px;
-            margin: 60px auto;
-            padding: 0 20px;
+            padding: 100px 15%;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         h2 {
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 10px;
+            color: #00bfff;
+            font-size: 32px;
         }
 
         ul {
             line-height: 1.8;
+            font-size: 18px;
         }
 
-        a {
-            color: #0077cc;
-            text-decoration: none;
+        .wave {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
 
         footer {
             text-align: center;
             padding: 40px;
-            background: #111;
-            color: white;
-            margin-top: 60px;
+            background: #06080f;
+            color: #888;
         }
 
-        .links a {
-            margin-right: 15px;
+        .button {
+            margin-top: 30px;
+            padding: 12px 25px;
+            background: #00bfff;
+            color: black;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
         }
+
     </style>
 </head>
+
 <body>
+
+<canvas id="particles"></canvas>
 
 <header>
     <h1>Dr. Ashish Shukla</h1>
-    <p>Photonics Engineer & Research Scientist</p>
-    <p style="margin-top:15px; font-size:16px; color:#aaa;">
-        Fiber Optic Sensing | Applied Optics | Environmental & Biomedical Systems
-    </p>
+    <div class="subtitle">Photonics Engineer & Research Scientist</div>
+    <div class="tagline">
+        Designing high-sensitivity optical fiber sensing systems and advanced photonic instrumentation.
+    </div>
+    <a class="button" href="#">Download CV</a>
+
+    <svg class="wave" viewBox="0 0 1440 320">
+        <path fill="#00bfff" fill-opacity="0.2"
+        d="M0,160L60,170C120,180,240,200,360,202.7C480,205,600,191,720,170.7C840,150,960,128,1080,138.7C1200,149,1320,192,1380,213.3L1440,235V320H0Z">
+        </path>
+    </svg>
 </header>
 
-
 <section>
-    <h2>About</h2>
-<p>
-I am a photonics researcher specializing in optical fiber-based sensing systems for environmental and biomedical applications.
-My work bridges fundamental photonic principles with practical sensor engineering, focusing on sensitivity enhancement,
-instrumentation design, and real-world deployment of optical systems.
-</p>
-</section>
-
-<section>
-    <h2>Research Interests</h2>
+    <h2>Research Focus</h2>
     <ul>
-        <li>Fiber Optic Sensors</li>
-        <li>Nonlinear Photonics</li>
-        <li>Environmental Monitoring</li>
-        <li>Optical Instrumentation</li>
+        <li>Fiber Optic Sensor Sensitivity Enhancement</li>
+        <li>Nonlinear Photonics & Mode Engineering</li>
+        <li>Computational Modeling (Python / MATLAB)</li>
+        <li>Environmental & Biomedical Sensing</li>
     </ul>
 </section>
 
 <section>
-    <h2>Projects</h2>
-    <p>Python-based photonics simulations and sensor modeling.</p>
+    <h2>Selected Work</h2>
+    <p>
+        Aptamer-functionalized fiber optic sensors for arsenic detection.
+        Higher-order mode Gaussian beam engineering for enhanced optical sensitivity.
+    </p>
 </section>
 
 <section>
-    <h2>Publications</h2>
-    <p>Coming soon.</p>
-</section>
-
-<section>
-    <h2>Contact</h2>
-    <div class="links">
-        <a href="mailto:your-email@example.com">Email</a>
-        <a href="#">Google Scholar</a>
-        <a href="https://github.com/drashishshukla">GitHub</a>
-    </div>
+    <h2>Connect</h2>
+    <p>Email | GitHub | Google Scholar</p>
 </section>
 
 <footer>
     © 2026 Dr. Ashish Shukla
 </footer>
+
+<script>
+    // PARTICLES
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+
+    for (let i = 0; i < 100; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2,
+            dx: (Math.random() - 0.5) * 0.5,
+            dy: (Math.random() - 0.5) * 0.5
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#00bfff";
+
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            p.x += p.dx;
+            p.y += p.dy;
+
+            if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // SCROLL REVEAL
+    const sections = document.querySelectorAll("section");
+
+    window.addEventListener("scroll", () => {
+        sections.forEach(section => {
+            const top = section.getBoundingClientRect().top;
+            if (top < window.innerHeight - 100) {
+                section.classList.add("visible");
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
