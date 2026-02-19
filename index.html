@@ -49,10 +49,10 @@
         }
 
         section {
-            padding: 100px 15%;
+            padding: 120px 15%;
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s ease;
+            transform: translateY(400px);
+            transition: opacity 1s ease, transform 1s ease;
         }
 
         section.visible {
@@ -186,14 +186,17 @@
 
     const sections = document.querySelectorAll("section");
 
-    window.addEventListener("scroll", () => {
+    function revealOnScroll() {
         sections.forEach(section => {
-            const top = section.getBoundingClientRect().top;
-            if (top < window.innerHeight - 100) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.85) {
                 section.classList.add("visible");
             }
         });
-    });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
 </script>
 
 </body>
